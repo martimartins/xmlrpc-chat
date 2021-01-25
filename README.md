@@ -1,6 +1,6 @@
-# xmlrcp-chat
+# xmlrpc-chat
 
-A simple chat using xml-rcp...
+A simple chat using xml-rpc...
 
 ## running the server 
     python3 server.py
