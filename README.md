@@ -9,4 +9,4 @@ First need run the server, to recibe the requests.
 ## running the client 
     python3 client.py
 And the client, to send the requests 
-when u execute the client, will open automatically other teminal(utils.py), that terminal will show u all the messagens. 
+when u execute the client, will ask for a name (nick name), that name will show for all users are connected in the server when u send messagens.
