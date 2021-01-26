@@ -16,23 +16,39 @@ def cls1():  #APENAS UMA SIMPLES FUNC PARA LIMPAR A TELA(clear)
         _ = system('clear')
 
 nome = ""
+temp_messages = []
 proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(IP, PORT))
+status = False
+
+def check_messagens(proxy):
+    global temp_messages
+    global status
+    while True:
+        time.sleep(1)
+        data = proxy.send_message_list()
+        if data != temp_messages:
+            for d in data:
+                if d not in temp_messages:
+                    temp_messages.append(d)
+                    print(f"\n{d}")
 
 def pergunta_por_message():
     while True:
-        msg = input(">>> ")
+        msg = input()
         if msg != "":
             messagens_totais = proxy.send_message(msg, nome)
-            cls1()
 
 def main():
     global nome
     cls1()
     print("Bem-Vindo ao Demo Chat Server 1.0\n\n")
     nome = input("Nome?: ")
-    os.system(f"start cmd /k {sys.executable} utils.py")
-    func = threading.Thread(target=pergunta_por_message)
+    func = threading.Thread(target=check_messagens, args=(proxy,))
     func.start()
+    while True:
+        if status == False:
+            pergunta_por_message()
+            print(CURSOR_UP_ONE + ERASE_LINE + inp)
 
 if __name__ == "__main__":
     print("A conectar ao servidor...")
