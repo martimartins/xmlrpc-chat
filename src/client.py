@@ -31,14 +31,14 @@ def check_messagens(proxy):
             for d in data:
                 if d not in temp_messages:
                     temp_messages.append(d)
-                    print(f"\n{d[int(len(d)-4:)]}")
+                    print(f"\n{d[:int(len(d)-4)]}")
 
 def pergunta_por_message():
     while True:
         msg = input()
         if msg != "":
             id_of_message = random.randint(1000, 9999)
-            messagens_totais = proxy.send_message(msg+id_of_message, nome)
+            messagens_totais = proxy.send_message(msg+str(id_of_message), nome)
 
 def main():
     global nome
